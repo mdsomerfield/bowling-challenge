@@ -1,8 +1,9 @@
 module.exports = function(config) {
   config.set({
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine-jquery', 'jasmine'],
 
     files: [
+      'lib/**/*.js',
       'src/**/*.js',
       'specs/**/*.js'
     ],
