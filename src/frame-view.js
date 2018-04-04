@@ -1,5 +1,6 @@
 function FrameView(frame) {
-  this.frame = frame;
+  this._frame = frame;
+  this._element = null;
 }
 
 FrameView.prototype.render = function() {
@@ -7,9 +8,14 @@ FrameView.prototype.render = function() {
     `<div class='frame__container'>
       <div class='frame__score'>${this._getFrameScore()}</div>
     </div>`;
-  return $(content);
+  this._element = $(content);
+  return this._element;
+}
+
+FrameView.prototype.update = function() {
+  this._element.find('.frame__score').text(this._getFrameScore());
 }
 
 FrameView.prototype._getFrameScore = function() {
-  return this.frame.getScore();
+  return this._frame.getScore();
 }
