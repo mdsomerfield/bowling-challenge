@@ -7,5 +7,5 @@ Game.prototype.roll = function(numPins) {
 }
 
 Game.prototype._getActiveFrame = function() {
-  return this.frames.find((frame) => frame.active)
+  return this.frames.find((frame) => !frame.isComplete)
 }
