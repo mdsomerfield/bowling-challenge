@@ -7,5 +7,5 @@ Frame.prototype.roll = function(numPins) {
 }
 
 Frame.prototype.getScore = function() {
-  return this.rolls.reduce((a, b) => a + b);
+  return this.rolls.reduce((a, b) => a + b, 0);
 }
