@@ -1,5 +1,7 @@
 (function(exports) {
 
+  var frameViewBuilder = exports.frameViewBuilder;
+
   describe("FrameView", function() {
 
     describe("#render", function() {
@@ -8,7 +10,7 @@
         // arrange
         var frame = new Frame();
         frame.roll(7);
-        var frameView = new FrameView(frame);
+        var frameView = frameViewBuilder(frame);
 
         // act
         var html = frameView.render();
@@ -24,7 +26,7 @@
       it("Updates the score in the html element", function() {
         //arrange
         var frame = new Frame();
-        var frameView = new FrameView(frame);
+        var frameView = frameViewBuilder(frame);
         var frameViewElement = frameView.render();
         frame.roll(9);
 

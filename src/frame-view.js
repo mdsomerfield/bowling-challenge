@@ -22,6 +22,8 @@
     return this._frame.getScore();
   }
 
-  exports.FrameView = FrameView;
+  exports.frameViewBuilder = function(frame) {
+    return new FrameView(frame);
+  }
 
 })(this);
