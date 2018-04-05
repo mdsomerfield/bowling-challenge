@@ -8,11 +8,8 @@
 
       it('Renders a component with all the game frames as children', function() {
         // arrange
-        var frameViews = [
-          { getScore: () => 0, render: () => null },
-          { getScore: () => 0, render: () => null }
-        ];
-        var game = { getFrames: () => frameViews };
+        var frames = [ _buildFrameMock(), _buildFrameMock() ];
+        var game = { getFrames: () => frames };
         var gameView = new GameView(game);
 
         // act
@@ -28,20 +25,12 @@
 
       it('Updates all the child frames', function() {
         // arrange
-        var frameViewMocks = [
-          { render: () => null, update: () => null },
-          { render: () => null, update: () => null }
-        ];
-        spyOn(frameViewMocks[0], 'update');
-        spyOn(frameViewMocks[1], 'update');
+        var frameViewMocks = [ _buildFrameViewMock(), _buildFrameViewMock() ];
         spyOn(frameViewBuilder, 'build')
           .and.returnValues(frameViewMocks[0], frameViewMocks[1]);
 
-        var frameViews = [
-          { getScore: () => 0, render: () => null },
-          { getScore: () => 0, render: () => null }
-        ]
-        var game = { getFrames: () => frameViews };
+        var frames = [ _buildFrameMock(), _buildFrameMock() ];
+        var game = { getFrames: () => frames };
         var gameView = new GameView(game);
         gameView.render();
 
@@ -56,5 +45,21 @@
     });
 
   });
+
+  function _buildFrameMock() {
+    return {
+      getScore: () => 0,
+      render: () => null
+    };
+  }
+
+  function _buildFrameViewMock() {
+    var mock = {
+      render: () => null,
+      update: () => null
+    };
+    spyOn(mock, 'update');
+    return mock;
+  }
 
 })(this);
