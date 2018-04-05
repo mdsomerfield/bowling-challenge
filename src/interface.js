@@ -1,13 +1,13 @@
 (function(exports) {
 
   var Frame = exports.Frame;
-  var FrameView = exports.FrameView;
+  var frameViewBuilder = exports.frameViewBuilder;
   var Controls = exports.ControlsView;
 
   function initialise() {
 
     var frame = new Frame();
-    var frameView = new FrameView(frame);
+    var frameView = frameViewBuilder(frame);
     var frameElement = frameView.render();
     $('#scorecard-container').append(frameElement);
 
