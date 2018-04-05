@@ -7,7 +7,7 @@
   function initialise() {
 
     var frame = new Frame();
-    var frameView = frameViewBuilder(frame);
+    var frameView = frameViewBuilder.build(frame);
     var frameElement = frameView.render();
     $('#scorecard-container').append(frameElement);
 

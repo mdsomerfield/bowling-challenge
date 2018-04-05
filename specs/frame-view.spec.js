@@ -9,7 +9,7 @@
       it("Returns an html representation of a single frame", function() {
         // arrange
         var frame = { getScore: () => 7 };
-        var frameView = frameViewBuilder(frame);
+        var frameView = frameViewBuilder.build(frame);
 
         // act
         var html = frameView.render();
@@ -25,7 +25,7 @@
       it("Updates the score in the html element", function() {
         //arrange
         var frame = { getScore: () => 2 };
-        var frameView = frameViewBuilder(frame);
+        var frameView = frameViewBuilder.build(frame);
         var frameViewElement = frameView.render();
         frame.getScore = () => 9;
 
