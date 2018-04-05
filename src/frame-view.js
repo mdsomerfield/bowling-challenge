@@ -20,6 +20,8 @@
 
   FrameView.prototype.update = function() {
     this._element.find('.frame__score').text(this._getFrameScore());
+    $(this._element.find('.roll__score')[0]).text(this._getRollScore()[0]);
+    $(this._element.find('.roll__score')[1]).text(this._getRollScore()[1]);
   }
 
   FrameView.prototype._getFrameScore = function() {

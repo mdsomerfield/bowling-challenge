@@ -32,18 +32,29 @@
 
     describe('#update', function() {
 
-      it("Updates the score in the html element", function() {
+      var frameViewElement;
+
+      beforeEach(function() {
         //arrange
         var frame = { getScore: () => 2, getRolls: () => [2] };
         var frameView = frameViewBuilder.build(frame);
-        var frameViewElement = frameView.render();
+        frameViewElement = frameView.render();
         frame.getScore = () => 9;
+        frame.getRolls = () => [2, 7];
 
         //act
         frameView.update();
+      });
 
+      it("Updates the frame score in the html element", function() {
         //assert
         expect(frameViewElement.find('.frame__score')).toContainText(9);
+      })
+
+      it("Updates the roll scores in the html element", function() {
+        //assert
+        expect(frameViewElement.find('.roll__score')[0]).toContainText(2);
+        expect(frameViewElement.find('.roll__score')[1]).toContainText(7);
       })
 
     })
