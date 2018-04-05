@@ -1,6 +1,6 @@
 (function(exports) {
 
-  var Game = exports.Game;
+  var gameBuilder = exports.gameBuilder;
 
   describe("Game", function() {
 
@@ -10,11 +10,11 @@
 
       beforeEach(function() {
         // arrange
-        var inactiveFrame = { isComplete: true }
-        activeFrame1 = { isComplete: false, roll: () => false };
-        activeFrame2 = { isComplete: false, roll: () => false };
+        var inactiveFrame = { isComplete: () => true }
+        activeFrame1 = { isComplete: () => false, roll: () => false };
+        activeFrame2 = { isComplete: () => false, roll: () => false };
 
-        game = new Game([ inactiveFrame, activeFrame1, activeFrame2 ]);
+        game = gameBuilder.build([ inactiveFrame, activeFrame1, activeFrame2 ]);
         spyOn(activeFrame1, 'roll');
         spyOn(activeFrame2, 'roll');
 
@@ -36,7 +36,7 @@
     describe("#getFrame", function() {
       it('returns a list of frames', function() {
         // arrange
-        var game = new Game([{}, {}, {}]);
+        var game = gameBuilder.build([{}, {}, {}]);
 
         // act
         var frames = game.getFrames();

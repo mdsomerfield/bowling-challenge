@@ -1,12 +1,13 @@
 (function(exports) {
 
+  var gameBuilder = exports.gameBuilder;
   var Frame = exports.Frame;
   var frameViewBuilder = exports.frameViewBuilder;
   var Controls = exports.ControlsView;
 
   function initialise() {
 
-    var game = new Game();
+    var game = gameBuilder.build10FrameGame();
     var gameView = new GameView(game);
     var gameElement = gameView.render();
     $('#scorecard-container').append(gameElement);
@@ -16,8 +17,8 @@
     $('#controls-container').append(controlsElement);
 
     function addScore(value) {
-      frame.roll(parseInt(value));
-      frameView.update();
+      game.roll(parseInt(value));
+      gameView.update();
     }
   }
 
