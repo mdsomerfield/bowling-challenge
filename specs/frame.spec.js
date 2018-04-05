@@ -26,6 +26,17 @@
         expect(action).toThrow("Invalid action - not enough pins left");
       });
 
+      it("Does not allow more than two rolls to be attempted", function() {
+        // arrange
+        var frame = new Frame([4, 1]);
+
+        // act
+        var action = () => frame.roll(1);
+
+        // assert
+        expect(action).toThrow("Invalid action - too many rolls")
+      })
+
     });
 
     describe('#isComplete', function() {

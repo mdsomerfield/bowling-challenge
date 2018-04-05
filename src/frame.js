@@ -25,6 +25,9 @@
     if (this._totalPinsKnockedDown() + roll > 10) {
       throw "Invalid action - not enough pins left";
     }
+    if (this.isComplete()) {
+      throw "Invalid action - too many rolls";
+    }
   }
 
   Frame.prototype._totalPinsKnockedDown = function() {
