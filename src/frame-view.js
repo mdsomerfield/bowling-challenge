@@ -1,21 +1,27 @@
-function FrameView(frame) {
-  this._frame = frame;
-  this._element = null;
-}
+(function(exports) {
 
-FrameView.prototype.render = function() {
-  var content =
-    `<div class='frame__container'>
-      <div class='frame__score'>${this._getFrameScore()}</div>
-    </div>`;
-  this._element = $(content);
-  return this._element;
-}
+  function FrameView(frame) {
+    this._frame = frame;
+    this._element = null;
+  }
 
-FrameView.prototype.update = function() {
-  this._element.find('.frame__score').text(this._getFrameScore());
-}
+  FrameView.prototype.render = function() {
+    var content =
+      `<div class='frame__container'>
+        <div class='frame__score'>${this._getFrameScore()}</div>
+      </div>`;
+    this._element = $(content);
+    return this._element;
+  }
 
-FrameView.prototype._getFrameScore = function() {
-  return this._frame.getScore();
-}
+  FrameView.prototype.update = function() {
+    this._element.find('.frame__score').text(this._getFrameScore());
+  }
+
+  FrameView.prototype._getFrameScore = function() {
+    return this._frame.getScore();
+  }
+
+  exports.FrameView = FrameView;
+
+})(this);

@@ -1,23 +1,29 @@
-describe('GameView', function() {
+(function(exports) {
 
-  describe('render', function() {
+  var GameView = exports.GameView;
 
-    it('Renders a component with all the game frames as children', function() {
-      // arrange
-      var frameViews = [
-        { getScore: () => 0, render: () => null },
-        { getScore: () => 0, render: () => null }
-      ];
-      var game = { getFrames: () => frameViews };
-      var gameView = new GameView(game);
+  describe('GameView', function() {
 
-      // act
-      var viewElement = gameView.render();
+    describe('render', function() {
 
-      // assert
-      expect(viewElement.children('.frame__container').length).toEqual(2);
+      it('Renders a component with all the game frames as children', function() {
+        // arrange
+        var frameViews = [
+          { getScore: () => 0, render: () => null },
+          { getScore: () => 0, render: () => null }
+        ];
+        var game = { getFrames: () => frameViews };
+        var gameView = new GameView(game);
+
+        // act
+        var viewElement = gameView.render();
+
+        // assert
+        expect(viewElement.children('.frame__container').length).toEqual(2);
+      });
+
     });
 
   });
 
-});
+})(this);

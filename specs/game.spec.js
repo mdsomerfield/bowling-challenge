@@ -1,32 +1,38 @@
-describe("Game", function() {
+(function(exports) {
 
-  describe("#roll", function() {
+  var Game = exports.Game;
 
-    var game, activeFrame1, activeFrame2;
+  describe("Game", function() {
 
-    beforeEach(function() {
-      // arrange
-      var inactiveFrame = { isComplete: true }
-      activeFrame1 = { isComplete: false, roll: () => false };
-      activeFrame2 = { isComplete: false, roll: () => false };
+    describe("#roll", function() {
 
-      game = new Game([ inactiveFrame, activeFrame1, activeFrame2 ]);
-      spyOn(activeFrame1, 'roll');
-      spyOn(activeFrame2, 'roll');
+      var game, activeFrame1, activeFrame2;
 
-      // act
-      game.roll(4);
+      beforeEach(function() {
+        // arrange
+        var inactiveFrame = { isComplete: true }
+        activeFrame1 = { isComplete: false, roll: () => false };
+        activeFrame2 = { isComplete: false, roll: () => false };
+
+        game = new Game([ inactiveFrame, activeFrame1, activeFrame2 ]);
+        spyOn(activeFrame1, 'roll');
+        spyOn(activeFrame2, 'roll');
+
+        // act
+        game.roll(4);
+      });
+
+      it("applies the roll to the first active frame", function() {
+        // assert
+        expect(activeFrame1.roll).toHaveBeenCalledWith(4);
+      });
+
+      it("does not apply the roll to subsequent active frame", function() {
+        // assert
+        expect(activeFrame2.roll).not.toHaveBeenCalled();
+      });
     });
 
-    it("applies the roll to the first active frame", function() {
-      // assert
-      expect(activeFrame1.roll).toHaveBeenCalledWith(4);
-    });
-
-    it("does not apply the roll to subsequent active frame", function() {
-      // assert
-      expect(activeFrame2.roll).not.toHaveBeenCalled();
-    });
   });
 
-});
+})(this);

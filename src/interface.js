@@ -1,19 +1,26 @@
-function initialise() {
+(function(exports) {
 
-  var frame = new Frame();
-  var frameView = new FrameView(frame);
-  var frameElement = frameView.render();
-  $('#scorecard-container').append(frameElement);
+  var Frame = exports.Frame;
+  var FrameView = exports.FrameView;
+  var Controls = exports.ControlsView;
 
-  var controlsView = new ControlsView(addScore);
-  var controlsElement = controlsView.render();
-  $('#controls-container').append(controlsElement);
+  function initialise() {
 
-  function addScore(value) {
-    frame.roll(parseInt(value));
-    frameView.update();
+    var frame = new Frame();
+    var frameView = new FrameView(frame);
+    var frameElement = frameView.render();
+    $('#scorecard-container').append(frameElement);
+
+    var controlsView = new ControlsView(addScore);
+    var controlsElement = controlsView.render();
+    $('#controls-container').append(controlsElement);
+
+    function addScore(value) {
+      frame.roll(parseInt(value));
+      frameView.update();
+    }
   }
-}
 
+  $(document).ready(initialise);
 
-$(document).ready(initialise);
+})(this);

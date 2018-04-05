@@ -1,38 +1,42 @@
-describe("FrameView", function() {
+(function(exports) {
 
-  describe("#render", function() {
+  describe("FrameView", function() {
 
-    it("Returns an html representation of a single frame", function() {
-      // arrange
-      var frame = new Frame();
-      frame.roll(7);
-      var frameView = new FrameView(frame);
+    describe("#render", function() {
 
-      // act
-      var html = frameView.render();
+      it("Returns an html representation of a single frame", function() {
+        // arrange
+        var frame = new Frame();
+        frame.roll(7);
+        var frameView = new FrameView(frame);
 
-      // assert
-      expect(html.find('.frame__score')).toContainText('7');
-    })
+        // act
+        var html = frameView.render();
 
-  });
+        // assert
+        expect(html.find('.frame__score')).toContainText('7');
+      })
 
-  describe('#update', function() {
+    });
 
-    it("Updates the score in the html element", function() {
-      //arrange
-      var frame = new Frame();
-      var frameView = new FrameView(frame);
-      var frameViewElement = frameView.render();
-      frame.roll(9);
+    describe('#update', function() {
 
-      //act
-      frameView.update();
+      it("Updates the score in the html element", function() {
+        //arrange
+        var frame = new Frame();
+        var frameView = new FrameView(frame);
+        var frameViewElement = frameView.render();
+        frame.roll(9);
 
-      //assert
-      expect(frameViewElement.find('.frame__score')).toContainText(9);
+        //act
+        frameView.update();
+
+        //assert
+        expect(frameViewElement.find('.frame__score')).toContainText(9);
+      })
+
     })
 
   })
 
-})
+})(this);

@@ -1,11 +1,17 @@
-function Game(frames = []) {
-  this.frames = frames;
-}
+(function(exports) {
 
-Game.prototype.roll = function(numPins) {
-  this._getActiveFrame().roll(numPins);
-}
+  function Game(frames = []) {
+    this.frames = frames;
+  }
 
-Game.prototype._getActiveFrame = function() {
-  return this.frames.find((frame) => !frame.isComplete)
-}
+  Game.prototype.roll = function(numPins) {
+    this._getActiveFrame().roll(numPins);
+  }
+
+  Game.prototype._getActiveFrame = function() {
+    return this.frames.find((frame) => !frame.isComplete)
+  }
+
+  exports.Game = Game;
+  
+})(this);
