@@ -14,11 +14,25 @@
   border: 1px solid #C1C1C1;
   border-radius: 4px;
   font-size: 20px;
+  flex-direction: column;
+  text-align: center;
 }
 
 .frame__score {
   flex: 1;
 }
+
+.frame__rolls {
+  display: flex;
+  flex: 1 1 24px;
+  width: 100%;
+  border-bottom: 1px solid #D1D1D1;
+}
+
+.roll__score {
+  flex: 1;
+}
+
 
 .score__input {
   padding: 4px;
