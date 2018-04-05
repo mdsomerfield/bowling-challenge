@@ -15,6 +15,17 @@
         expect(frame.getScore()).toBe(7);
       })
 
+      it("Does not allow more than 10 pins to be knocked down", function() {
+        // arrange
+        var frame = new Frame([9]);
+
+        // act
+        var action = () => frame.roll(2);
+
+        // assert
+        expect(action).toThrow("Invalid action - not enough pins left");
+      });
+
     });
 
     describe('#isComplete', function() {
