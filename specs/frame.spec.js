@@ -79,6 +79,30 @@
 
     });
 
+    describe('#needsBouns', function() {
+
+      describe('when a half strike has been rolled', function() {
+
+        it('is true if no bonus has been recorded', function() {
+          // arrange
+          var frame = new Frame([2, 8]);
+
+          // evaluate
+          expect(frame.needsBonus()).toBe(true);
+        });
+
+        it('is false if a bonus has already been recorded', function() {
+          // arrange
+          var frame = new Frame([2, 8], [4]);
+
+          // evaluate
+          expect(frame.needsBonus()).toBe(false);
+        });
+
+      })
+
+    })
+
   })
 
 })(this);

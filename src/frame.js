@@ -26,6 +26,14 @@
     return this.rolls.length >= 2;
   }
 
+  Frame.prototype.needsBonus = function() {
+    return this._isHalfStrike() && this.bonuses.length < 1;
+  }
+
+  Frame.prototype._isHalfStrike = function() {
+    return this.getScore() == 10 && this.rolls.length == 2;
+  }
+
   Frame.prototype._validateRoll = function(roll) {
     if (this._totalPinsKnockedDown() + roll > 10) {
       throw "Invalid action - not enough pins left";
