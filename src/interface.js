@@ -6,10 +6,10 @@
 
   function initialise() {
 
-    var frame = new Frame();
-    var frameView = frameViewBuilder.build(frame);
-    var frameElement = frameView.render();
-    $('#scorecard-container').append(frameElement);
+    var game = new Game();
+    var gameView = new GameView(game);
+    var gameElement = gameView.render();
+    $('#scorecard-container').append(gameElement);
 
     var controlsView = new ControlsView(addScore);
     var controlsElement = controlsView.render();

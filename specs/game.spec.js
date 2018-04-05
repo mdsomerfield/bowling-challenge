@@ -33,6 +33,20 @@
       });
     });
 
+    describe("#getFrame", function() {
+      it('returns a list of frames', function() {
+        // arrange
+        var game = new Game([{}, {}, {}]);
+
+        // act
+        var frames = game.getFrames();
+
+        // assert
+        expect(frames.length).toBe(3);
+      })
+    });
+
   });
+
 
 })(this);

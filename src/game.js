@@ -12,6 +12,10 @@
     return this.frames.find((frame) => !frame.isComplete)
   }
 
+  Game.prototype.getFrames = function() {
+    return this.frames.map((frame) => frame);
+  }
+
   exports.Game = Game;
-  
+
 })(this);
