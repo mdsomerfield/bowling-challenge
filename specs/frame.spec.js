@@ -64,6 +64,21 @@
       })
     })
 
+    describe('#recordBonusRoll', function() {
+
+      it('adds to the score', function() {
+        // arrange
+        var frame = new Frame([2, 8]);
+
+        // act
+        frame.recordBonusRoll(8);
+
+        // assert
+        expect(frame.getScore()).toBe(18);
+      });
+
+    });
+
   })
 
 })(this);

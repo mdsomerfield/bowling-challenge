@@ -1,7 +1,8 @@
 (function(exports) {
 
-  function Frame(rolls = []) {
+  function Frame(rolls = [], bonuses = []) {
     this.rolls = rolls;
+    this.bonuses = bonuses;
   }
 
   Frame.prototype.roll = function(numPins) {
@@ -9,12 +10,16 @@
     this.rolls.push(numPins);
   }
 
+  Frame.prototype.recordBonusRoll = function(numPins) {
+    this.bonuses.push(numPins);
+  }
+
   Frame.prototype.getRolls = function() {
     return this.rolls.map((roll) => roll);
   }
 
   Frame.prototype.getScore = function() {
-    return this._totalPinsKnockedDown();
+    return this._totalPinsKnockedDown() + this._totalBonus();
   }
 
   Frame.prototype.isComplete = function() {
@@ -32,6 +37,10 @@
 
   Frame.prototype._totalPinsKnockedDown = function() {
     return this.rolls.reduce((a, b) => a + b, 0);
+  }
+
+  Frame.prototype._totalBonus = function() {
+    return this.bonuses.reduce((a, b) => a + b, 0);
   }
 
   exports.Frame = Frame;
