@@ -8,6 +8,10 @@
   FrameView.prototype.render = function() {
     var content =
       `<div class='frame__container'>
+        <div class='frame__rolls'>
+          <div class='roll__score'>${this._getRollScore(0)}</div>
+          <div class='roll__score'>${this._getRollScore(1)}</div>
+        </div>
         <div class='frame__score'>${this._getFrameScore()}</div>
       </div>`;
     this._element = $(content);
@@ -20,6 +24,10 @@
 
   FrameView.prototype._getFrameScore = function() {
     return this._frame.getScore();
+  }
+
+  FrameView.prototype._getRollScore = function() {
+    return this._frame.getRolls();
   }
 
   exports.frameViewBuilder = {

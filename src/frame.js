@@ -8,6 +8,10 @@
     this.rolls.push(numPins);
   }
 
+  Frame.prototype.getRolls = function() {
+    return this.rolls.map((roll) => roll);
+  }
+
   Frame.prototype.getScore = function() {
     return this.rolls.reduce((a, b) => a + b, 0);
   }

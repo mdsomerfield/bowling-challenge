@@ -49,6 +49,7 @@
   function _buildFrameMock() {
     return {
       getScore: () => 0,
+      getRolls: () => [],
       render: () => null
     };
   }
