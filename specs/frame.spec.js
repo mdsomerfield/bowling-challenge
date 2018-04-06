@@ -45,22 +45,24 @@
         // arrange
         var frame = new Frame([4, 6]);
 
-        // act
-        var isComplete = frame.isComplete();
+        // evaluate
+        expect(frame.isComplete()).toBe(true);
+      });
 
-        // assert
-        expect(isComplete).toBe(true);
+      it('is true when 10 pins have been knocked down', function() {
+        // arrange
+        var frame = new Frame([10]);
+
+        // evaluate
+        expect(frame.isComplete()).toBe(true);
       });
 
       it('is false when fewer than 2 rolls have been completed', function() {
         // arrange
         var frame = new Frame([4]);
 
-        // act
-        var isComplete = frame.isComplete();
-
-        // assert
-        expect(isComplete).toBe(false);
+        // evaluate
+        expect(frame.isComplete()).toBe(false);
       })
     })
 

@@ -23,7 +23,7 @@
   }
 
   Frame.prototype.isComplete = function() {
-    return this.rolls.length >= 2;
+    return this.rolls.length >= 2 || this._totalPinsKnockedDown() == 10;
   }
 
   Frame.prototype.needsBonus = function() {
