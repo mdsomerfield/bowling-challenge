@@ -2,21 +2,32 @@
 
   var gameBuilder = exports.gameBuilder;
 
+  function _buildMockFrame(isComplete, isExpectingBonus) {
+    var mock = {
+      isComplete: () => isComplete,
+      needsBonus: () => isExpectingBonus,
+      roll: () => null,
+      recordBonusRoll: () => null
+    }
+    spyOn(mock, 'roll');
+    spyOn(mock, 'recordBonusRoll');
+    return mock;
+  }
+
   describe("Game", function() {
 
     describe("#roll", function() {
 
-      var game, activeFrame1, activeFrame2;
+      var game, inactiveFrame1, inactiveFrame2, activeFrame1, activeFrame2;
 
       beforeEach(function() {
         // arrange
-        var inactiveFrame = { isComplete: () => true }
-        activeFrame1 = { isComplete: () => false, roll: () => false };
-        activeFrame2 = { isComplete: () => false, roll: () => false };
+        inactiveFrame1 = _buildMockFrame(true, false);
+        inactiveFrame2 = _buildMockFrame(true, true);
+        activeFrame1 = _buildMockFrame(false, false);
+        activeFrame2 = _buildMockFrame(false, false);
 
-        game = gameBuilder.build([ inactiveFrame, activeFrame1, activeFrame2 ]);
-        spyOn(activeFrame1, 'roll');
-        spyOn(activeFrame2, 'roll');
+        game = gameBuilder.build([ inactiveFrame1, inactiveFrame2, activeFrame1, activeFrame2 ]);
 
         // act
         game.roll(4);
@@ -31,6 +42,15 @@
         // assert
         expect(activeFrame2.roll).not.toHaveBeenCalled();
       });
+
+      it("applies bonuses to any frames which need a bonus", function() {
+        // expect
+        expect(inactiveFrame2.recordBonusRoll).toHaveBeenCalledWith(4);
+      })
+
+      it("does not apply bonuses to any frame which does not need a bonus", function() {
+        expect(inactiveFrame1.recordBonusRoll).not.toHaveBeenCalled();
+      })
     });
 
     describe("#getFrame", function() {

@@ -6,10 +6,15 @@
 
   Game.prototype.roll = function(numPins) {
     this._getActiveFrame().roll(numPins);
+    this._getFramesNeedingBonus().forEach((frame) => frame.recordBonusRoll(numPins));
   }
 
   Game.prototype._getActiveFrame = function() {
     return this.frames.find((frame) => !frame.isComplete());
+  }
+
+  Game.prototype._getFramesNeedingBonus = function() {
+    return this.frames.filter((frame) => frame.needsBonus());
   }
 
   Game.prototype.getFrames = function() {
