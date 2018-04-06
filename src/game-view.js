@@ -21,6 +21,7 @@
 
   GameView.prototype.update = function() {
     this.frameViews.forEach((frameView) => frameView.update());
+    this.element.find('.game-score__container').text(this.game.getScore());
   }
 
   exports.GameView = GameView;

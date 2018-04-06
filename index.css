@@ -6,6 +6,23 @@
   display: flex;
 }
 
+.frames__container {
+  display: flex;
+  flex: 1;
+}
+
+.game-score__container {
+  flex: 0 1 36px;
+  font-size: 24px;
+  background: #56B2B2;
+  color: white;
+  border-radius: 4px;
+  padding: 20px 8px;
+  height: 24px;
+  text-align: center;
+  margin: 4px;
+}
+
 .frame__container {
   display: flex;
   flex: 1;

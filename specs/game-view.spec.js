@@ -34,23 +34,32 @@
 
     describe('update', function() {
 
-      it('Updates all the child frames', function() {
+      var viewElement, frameViewMocks;
+
+      beforeEach(function() {
         // arrange
-        var frameViewMocks = [ _buildFrameViewMock(), _buildFrameViewMock() ];
+        frameViewMocks = [ _buildFrameViewMock(), _buildFrameViewMock() ];
         spyOn(frameViewBuilder, 'build')
           .and.returnValues(frameViewMocks[0], frameViewMocks[1]);
 
         var frames = [ _buildFrameMock(), _buildFrameMock() ];
         var game = { getFrames: () => frames, getScore: () => 36 };
         var gameView = new GameView(game);
-        gameView.render();
+        viewElement = gameView.render();
+        game.getScore = () => 40;
 
         // act
         gameView.update();
+      });
 
+      it('Updates all the child frames', function() {
         // assert
         frameViewMocks.forEach((frameView) => expect(frameView.update).toHaveBeenCalled());
 
+      });
+
+      it('Updates the overall score', function() {
+        expect(viewElement.find('.game-score__container').text()).toBe('40')
       });
 
     });
