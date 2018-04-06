@@ -10,8 +10,12 @@
     this.frameViews = this.game.getFrames().map((frame) => frameViewBuilder.build(frame));
 
     var frameViewElements = this.frameViews.map((view) => view.render());
-    this.element = $('<div class="game__container"></div>');
-    this.element.append(frameViewElements);
+    this.element = $(
+      `<div class="game__container">
+        <div class="frames__container"></div>
+        <div class="game-score__container">${this.game.getScore()}</div>
+      </div>`);
+    this.element.find('.frames__container').append(frameViewElements);
     return this.element;
   }
 

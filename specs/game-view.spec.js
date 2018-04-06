@@ -6,17 +6,28 @@
 
     describe('render', function() {
 
-      it('Renders a component with all the game frames as children', function() {
+      var viewElement;
+
+      beforeEach(function() {
         // arrange
         var frames = [ _buildFrameMock(), _buildFrameMock() ];
-        var game = { getFrames: () => frames };
+        var game = { getFrames: () => frames, getScore: () => 24 };
         var gameView = new GameView(game);
 
         // act
-        var viewElement = gameView.render();
+        viewElement = gameView.render();
+      })
 
+      it('Renders a component with all the game frames as children', function() {
         // assert
-        expect(viewElement.children('.frame__container').length).toEqual(2);
+        expect(viewElement
+          .find('.frames__container')
+          .children('.frame__container').length).toEqual(2);
+      });
+
+      it('Renders the overall game score', function() {
+        // assert
+        expect(viewElement.find('.game-score__container').text()).toBe('24')
       });
 
     });
@@ -30,7 +41,7 @@
           .and.returnValues(frameViewMocks[0], frameViewMocks[1]);
 
         var frames = [ _buildFrameMock(), _buildFrameMock() ];
-        var game = { getFrames: () => frames };
+        var game = { getFrames: () => frames, getScore: () => 36 };
         var gameView = new GameView(game);
         gameView.render();
 
