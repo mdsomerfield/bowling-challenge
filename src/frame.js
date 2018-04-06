@@ -27,11 +27,16 @@
   }
 
   Frame.prototype.needsBonus = function() {
-    return this._isHalfStrike() && this.bonuses.length < 1;
+    return (this._isHalfStrike() && this.bonuses.length < 1)
+        || (this._isStrike() && this.bonuses.length < 2);
   }
 
   Frame.prototype._isHalfStrike = function() {
-    return this.getScore() == 10 && this.rolls.length == 2;
+    return this._totalPinsKnockedDown() == 10 && this.rolls.length == 2;
+  }
+
+  Frame.prototype._isStrike = function() {
+    return this._totalPinsKnockedDown() == 10 && this.rolls.length == 1;
   }
 
   Frame.prototype._validateRoll = function(roll) {

@@ -101,6 +101,25 @@
 
       })
 
+      describe('when a strike has been rolled', function() {
+
+        it('is true if fewer than 2 bonuses have been rolled', function() {
+          // arrange
+          var frame = new Frame([10], [10]);
+
+          // evaluate
+          expect(frame.needsBonus()).toBe(true);
+        })
+
+        it('is fase if 2 bonuses have been recorded rolled', function() {
+          // arrange
+          var frame = new Frame([10], [10, 10]);
+
+          // evaluate
+          expect(frame.needsBonus()).toBe(false);
+        })
+
+      })
     })
 
   })
