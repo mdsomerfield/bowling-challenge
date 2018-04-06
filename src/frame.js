@@ -1,21 +1,21 @@
 (function(exports) {
 
   function Frame(rolls = [], bonuses = []) {
-    this.rolls = rolls;
-    this.bonuses = bonuses;
+    this._rolls = rolls;
+    this._bonuses = bonuses;
   }
 
   Frame.prototype.roll = function(numPins) {
     this._validateRoll(numPins);
-    this.rolls.push(numPins);
+    this._rolls.push(numPins);
   }
 
   Frame.prototype.recordBonusRoll = function(numPins) {
-    this.bonuses.push(numPins);
+    this._bonuses.push(numPins);
   }
 
   Frame.prototype.getRolls = function() {
-    return this.rolls.map((roll) => roll);
+    return this._rolls.map((roll) => roll);
   }
 
   Frame.prototype.getScore = function() {
@@ -23,20 +23,20 @@
   }
 
   Frame.prototype.isComplete = function() {
-    return this.rolls.length >= 2 || this._totalPinsKnockedDown() == 10;
+    return this._rolls.length >= 2 || this._totalPinsKnockedDown() == 10;
   }
 
   Frame.prototype.needsBonus = function() {
-    return (this._isHalfStrike() && this.bonuses.length < 1)
-        || (this._isStrike() && this.bonuses.length < 2);
+    return (this._isHalfStrike() && this._bonuses.length < 1)
+        || (this._isStrike() && this._bonuses.length < 2);
   }
 
   Frame.prototype._isHalfStrike = function() {
-    return this._totalPinsKnockedDown() == 10 && this.rolls.length == 2;
+    return this._totalPinsKnockedDown() == 10 && this._rolls.length == 2;
   }
 
   Frame.prototype._isStrike = function() {
-    return this._totalPinsKnockedDown() == 10 && this.rolls.length == 1;
+    return this._totalPinsKnockedDown() == 10 && this._rolls.length == 1;
   }
 
   Frame.prototype._validateRoll = function(roll) {
@@ -49,11 +49,11 @@
   }
 
   Frame.prototype._totalPinsKnockedDown = function() {
-    return this.rolls.reduce((a, b) => a + b, 0);
+    return this._rolls.reduce((a, b) => a + b, 0);
   }
 
   Frame.prototype._totalBonus = function() {
-    return this.bonuses.reduce((a, b) => a + b, 0);
+    return this._bonuses.reduce((a, b) => a + b, 0);
   }
 
   exports.Frame = Frame;

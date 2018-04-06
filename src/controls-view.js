@@ -1,14 +1,14 @@
 (function(exports) {
 
   function ControlsView(scoreButtonCallback) {
-    this.scoreButtonCallback = scoreButtonCallback;
+    this._scoreButtonCallback = scoreButtonCallback;
+    this.controlsElement = null;
   }
 
   ControlsView.prototype.render = function() {
-
-    this.controlsElement = this._buildElement();
+    this._controlsElement = this._buildElement();
     this._bindControls();
-    return this.controlsElement;
+    return this._controlsElement;
   }
 
   ControlsView.prototype._buildElement = function() {
@@ -21,9 +21,9 @@
   }
 
   ControlsView.prototype._bindControls = function() {
-    this.controlsElement.find('.score__button').click(() => {
-      var inputValue = this.controlsElement.find('.score__input').val();
-      this.scoreButtonCallback(inputValue);
+    this._controlsElement.find('.score__button').click(() => {
+      var inputValue = this._controlsElement.find('.score__input').val();
+      this._scoreButtonCallback(inputValue);
     });
   }
 

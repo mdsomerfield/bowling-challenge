@@ -1,7 +1,7 @@
 (function(exports) {
 
   function Game(frames = []) {
-    this.frames = frames;
+    this._frames = frames;
   }
 
   Game.prototype.roll = function(numPins) {
@@ -10,19 +10,19 @@
   }
 
   Game.prototype._getActiveFrame = function() {
-    return this.frames.find((frame) => !frame.isComplete());
+    return this._frames.find((frame) => !frame.isComplete());
   }
 
   Game.prototype._getFramesNeedingBonus = function() {
-    return this.frames.filter((frame) => frame.needsBonus());
+    return this._frames.filter((frame) => frame.needsBonus());
   }
 
   Game.prototype.getFrames = function() {
-    return this.frames.map((frame) => frame);
+    return this._frames.map((frame) => frame);
   }
 
   Game.prototype.getScore = function() {
-    return this.frames
+    return this._frames
       .map((frame) => frame.getScore())
       .reduce((a, b) => a + b, 0);
   }
