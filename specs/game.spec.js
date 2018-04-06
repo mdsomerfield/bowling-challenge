@@ -2,18 +2,6 @@
 
   var gameBuilder = exports.gameBuilder;
 
-  function _buildMockFrame(isComplete, isExpectingBonus) {
-    var mock = {
-      isComplete: () => isComplete,
-      needsBonus: () => isExpectingBonus,
-      roll: () => null,
-      recordBonusRoll: () => null
-    }
-    spyOn(mock, 'roll');
-    spyOn(mock, 'recordBonusRoll');
-    return mock;
-  }
-
   describe("Game", function() {
 
     describe("#roll", function() {
@@ -99,7 +87,36 @@
       })
     });
 
+    describe("#getScore", function() {
+
+      it("Sums the scores of all the frames", function()  {
+        // arrange
+        var frames = [
+          _buildMockFrame(true, false, 10),
+          _buildMockFrame(true, false, 15),
+          _buildMockFrame(true, false, 9)
+        ]
+        var game = gameBuilder.build(frames);
+
+        // evaluate
+        expect(game.getScore()).toBe(34);
+      })
+    });
+
   });
+
+  function _buildMockFrame(isComplete, isExpectingBonus, score) {
+    var mock = {
+      isComplete: () => isComplete,
+      needsBonus: () => isExpectingBonus,
+      roll: () => null,
+      recordBonusRoll: () => null,
+      getScore: () => score
+    }
+    spyOn(mock, 'roll');
+    spyOn(mock, 'recordBonusRoll');
+    return mock;
+  }
 
 
 })(this);

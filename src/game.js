@@ -21,6 +21,12 @@
     return this.frames.map((frame) => frame);
   }
 
+  Game.prototype.getScore = function() {
+    return this.frames
+      .map((frame) => frame.getScore())
+      .reduce((a, b) => a + b, 0);
+  }
+
   exports.gameBuilder = {
 
     build: (frames) => new Game(frames),
